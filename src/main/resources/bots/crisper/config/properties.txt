@@ -1,0 +1,8 @@
+url:http://www.alicebot.org
+name:crisper
+email:callmom-info@pandorabots.com
+gender:male
+botmaster:Mr. Shubham gulati
+organization:ALICE AI Foundation
+version:0.0.4
+
