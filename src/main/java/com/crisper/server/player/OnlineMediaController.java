@@ -38,7 +38,7 @@ public class OnlineMediaController implements IMediaController
 
     @Override
     public boolean playNext() {
-        spotifyService.playNext();
+        spotifyService.playNextSong();
         return true;
     }
 
@@ -57,7 +57,7 @@ public class OnlineMediaController implements IMediaController
 
     @Override
     public boolean playList(String root) {
-
+        spotifyService.playList(root);
         return true;
     }
 
@@ -77,8 +77,11 @@ public class OnlineMediaController implements IMediaController
         return false;
     }
 
-    private void playNextSong() {
-
+    @Override
+    public boolean volume(String count) {
+        spotifyService.volume(count);
+        return true;
     }
+
 
 }

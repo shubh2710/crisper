@@ -2,7 +2,7 @@
 <aiml>
 <!-- File: oob.aiml -->
 <!-- Author: Mr. Shubham gulati -->
-<!-- Last modified: October 02, 2020 -->
+<!-- Last modified: October 16, 2020 -->
 <!--  -->
 <!-- This AIML file is part of the CRISPER 0.0.4 chat bot knowledge base. -->
 <!--  -->
@@ -55,16 +55,16 @@
 <category><pattern>GOOGLE</pattern>
 <template>I'm opening Google search.  <oob><search/></oob></template>
 </category>
-
 <category><pattern>GOOGLE *</pattern>
 <template><oob><search><star/></search></oob> I'm opening your browser.</template>
 </category>
-
-<category><pattern>WHO IS *</pattern>
+<category><pattern>SEARCH *</pattern>
 <template>I'll try a web search.  <oob><search><star/></search></oob></template>
 </category>
-
-<category><pattern>SEARCH *</pattern>
+<category><pattern>SEARCH ABOUT *</pattern>
+<template>I'll try a web search.  <oob><search><star/></search></oob></template>
+</category>
+<category><pattern>TELL ME ABOUT *</pattern>
 <template>I'll try a web search.  <oob><search><star/></search></oob></template>
 </category>
 <category><pattern>FIND ME A *</pattern>
@@ -187,7 +187,6 @@
 <category><pattern>CALL 911</pattern>
 <template>Now dialing emergency services from your location.  <oob><dial>911</dial></oob></template>
 </category>
-
 <category><pattern>PLAY *</pattern>
 <template>Now loading your choice of music. I hope you like it. <oob><url>PLAY <star/></url></oob></template>
 </category>
@@ -197,17 +196,30 @@
 <category><pattern>AUTOPLAY *</pattern>
 <template>Setting up autoplay to music <oob><url>AUTOPLAY</url></oob></template>
 </category>
-
 <category><pattern>AUTOPLAY * SONGS</pattern>
 <template>Setting up autoplay to <star/> songs<oob><url>AUTOPLAY <star/></url></oob></template>
 </category>
-<category><pattern>PLAY NEXT *</pattern>
+<category><pattern>PLAY NEXT SONG</pattern>
 <template>Playing next song<oob><url>PLAYNEXT</url></oob></template>
 </category>
-<category><pattern>PLAY * SONGS</pattern>
+<category><pattern>PLAY * SONG</pattern>
 <template>Playing <star/> songs<oob><url>PLAYLIST <star/></url></oob></template>
 </category>
 
+<category><pattern>PLAY * PLAYLIST</pattern>
+<template>Playing <star/> songs<oob><url>PLAYLIST <star/></url></oob></template>
+</category>
+
+<category><pattern>TURN VOLUME *</pattern>
+<template>turning <star/> the music volume<oob><volume>VOLUME <star/></volume></oob></template>
+</category>
+
+<category><pattern>DO YOU KNOW WHO IS *</pattern>
+<template>Searching about <star/> <oob><search><star/></search></oob></template>
+</category>
+<category><pattern>WHO IS *</pattern>
+<template>Searching about <star/> <oob><search><star/></search></oob></template>
+</category>
 <category><pattern>WIFI ON</pattern>
 <template>Turning on Wifi.  <oob><wifi>on</wifi></oob></template>
 </category>
@@ -257,4 +269,22 @@
 <category><pattern>GPS OFF</pattern>
 <template>Use Settings to turn off GPS.</template>
 </category>
+
+
+<category><pattern>TURN * ROOM * *</pattern>
+<template>Turning <star/> ROOM <star index="2"/> <star index="3"/> LIGHTS<oob><home><star/>_<star index="2"/>_<star index="3"/></home></oob></template>
+</category>
+
+<category><pattern>TURN * ON</pattern>
+<template>Turning <star/> on<oob><home>ON <star/></home></oob></template>
+</category>
+
+<category><pattern>Start NOTE</pattern>
+<template>Turning <star/> on<oob><home>ON <star/></home></oob></template>
+</category>
+
+
+
+
+
 </aiml>

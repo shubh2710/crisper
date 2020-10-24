@@ -21,7 +21,7 @@ public class OnlineMusicProcessActionService {
             mediaController.playNext();
         }else if(data.contains("PLAYLIST")){
             data=data.replace("PLAYLIST","").trim().toLowerCase();
-            mediaController.playDirectory(data);
+            mediaController.playList(data);
         }
         else if(data.contains("AUTOPLAY")){
 
@@ -35,6 +35,9 @@ public class OnlineMusicProcessActionService {
             data=data.replace("PLAY","").trim().toLowerCase();
             mediaController.Play(data);
 
+        }else if(data.contains("VOLUME")){
+            data=data.replace("VOLUME","").trim().toLowerCase();
+            mediaController.volume(data);
         }else if(data.contains("")){
 
             data=data.replace("PLAY","").trim().toLowerCase();

@@ -97,6 +97,11 @@ public class MediaController implements IMediaController, IAutoPlay
         return false;
     }
 
+    @Override
+    public boolean volume(String count) {
+        return false;
+    }
+
     private void playNextSong() {
         index++;
         if(index<autoPlayList.size())

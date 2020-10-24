@@ -1,6 +1,6 @@
 package com.crisper.server.voice.processor;
 
-
+import com.crisper.server.mc.service.IHomeService;
 import com.crisper.server.voice.processor.service.OnlineMusicProcessActionService;
 import com.crisper.server.voice.processor.service.ProcessActionService;
 import com.crisper.server.web.service.GoogleSearchService;
@@ -22,6 +22,9 @@ public class VoiceActionProcessorService {
     OnlineMusicProcessActionService onlineActionService;
 
     @Autowired
+    IHomeService homeService;
+
+    @Autowired
     GoogleSearchService googleSearchService;
 
     public static boolean isOnline=true;
@@ -35,7 +38,6 @@ public class VoiceActionProcessorService {
                 if(data.contains("<url>")){
                     dataToProcess =data.substring(data.indexOf("<url>")+5,data.indexOf("</url>"));
                     System.out.println(dataToProcess);
-
                     if(isOnline){
                         onlineActionService.takeAction(dataToProcess);
                     }else
@@ -46,6 +48,12 @@ public class VoiceActionProcessorService {
                 }else if(data.contains("<map>")){
                     dataToProcess =data.substring(data.indexOf("<map>")+5,data.indexOf("</map>"));
                     dataForVoice=googleSearchService.search(dataToProcess);
+                }else if(data.contains("<home>")){
+                    dataToProcess =data.substring(data.indexOf("<home>")+6,data.indexOf("</home>"));
+                    homeService.takeAction(dataToProcess);
+                }else if(data.contains("<volume>")){
+                    dataToProcess =data.substring(data.indexOf("<volume>")+8,data.indexOf("</volume>"));
+                    onlineActionService.takeAction(dataToProcess);
                 }
             }else{
                 dataForVoice=data;

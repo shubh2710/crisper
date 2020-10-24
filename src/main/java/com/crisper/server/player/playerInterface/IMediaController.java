@@ -12,4 +12,5 @@ public interface IMediaController {
     public boolean isPlaying();
     public boolean playRandom();
     public boolean playDirectory(String name);
+    public boolean volume(String count);
 }

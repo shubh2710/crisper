@@ -17,6 +17,6 @@ public class VoiceCommadController {
 
     @PostMapping
     public void commmand(@RequestBody Command command) throws Exception {
-        service.command(command.getCommand());
+        service.command(command.getCommand().trim());
     }
 }

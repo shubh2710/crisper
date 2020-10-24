@@ -26,9 +26,4 @@ public class OnlinePlayerController {
         System.out.println(token.getToken());
         spotifyService.setRefreshToken(token.getToken());
     }
-    @GetMapping("/play")
-    public  void play()
-    {
-       spotifyService.play("parwah nahi");
-    }
 }

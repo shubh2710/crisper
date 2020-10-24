@@ -2,7 +2,7 @@
 <aiml>
 <!-- File: sraix.aiml -->
 <!-- Author: Mr. Shubham gulati -->
-<!-- Last modified: October 02, 2020 -->
+<!-- Last modified: October 16, 2020 -->
 <!--  -->
 <!-- This AIML file is part of the CRISPER 0.0.4 chat bot knowledge base. -->
 <!--  -->
@@ -518,9 +518,6 @@
 </category>
 <category><pattern>WHO IS IN THE *</pattern>
 <template><sraix>WHO IS IN THE <star/></sraix></template>
-</category>
-<category><pattern>WHO IS *</pattern>
-<template><sraix>WHO IS <star/></sraix></template>
 </category>
 <category><pattern>WHO IS SHAKESPEARE</pattern>
 <template><sraix>WHO IS SHAKESPEARE</sraix></template>

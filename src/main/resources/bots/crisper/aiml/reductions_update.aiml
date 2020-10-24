@@ -2,7 +2,7 @@
 <aiml>
 <!-- File: reductions_update.aiml -->
 <!-- Author: Mr. Shubham gulati -->
-<!-- Last modified: October 02, 2020 -->
+<!-- Last modified: October 16, 2020 -->
 <!--  -->
 <!-- This AIML file is part of the CRISPER 0.0.4 chat bot knowledge base. -->
 <!--  -->
@@ -1818,9 +1818,7 @@
 <category><pattern>TELL ME ABOUT A *</pattern>
 <template><srai>WHAT IS A <star/></srai></template>
 </category>
-<category><pattern>TURN * ON</pattern>
-<template><srai>TURN ON <star/></srai></template>
-</category>
+
 <category><pattern>BATTERY STATUS</pattern>
 <template><srai>BATTERY LEVEL</srai></template>
 </category>
@@ -2049,9 +2047,6 @@
 <category><pattern>YOUR RUDE</pattern>
 <template><srai>YOU ARE RUDE</srai></template>
 </category>
-<category><pattern>* WHO IS *</pattern>
-<template><srai>WHO IS <star index="2"/></srai></template>
-</category>
 <category><pattern>CAN YOU CHANGE YOUR NAME</pattern>
 <template><srai>HELP CHANGE NAME</srai></template>
 </category>
@@ -2172,9 +2167,7 @@
 <category><pattern>MAKE ME A SANDWICH</pattern>
 <template><srai>HOW DO I MAKE A SANDWICH</srai></template>
 </category>
-<category><pattern>TURN ON *</pattern>
-<template><srai>OPEN <star/></srai></template>
-</category>
+
 <category><pattern>YOUR THE *</pattern>
 <template><srai>YOU ARE THE <star/></srai></template>
 </category>

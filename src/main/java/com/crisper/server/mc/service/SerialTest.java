@@ -1,4 +1,4 @@
-package com.crisper.server.mc.cotroller;
+package com.crisper.server.mc.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -2,7 +2,7 @@
 <aiml>
 <!-- File: reductions1.aiml -->
 <!-- Author: Mr. Shubham gulati -->
-<!-- Last modified: October 02, 2020 -->
+<!-- Last modified: October 16, 2020 -->
 <!--  -->
 <!-- This AIML file is part of the CRISPER 0.0.4 chat bot knowledge base. -->
 <!--  -->
@@ -311,9 +311,6 @@
 </category>
 <category><pattern>WHAT TOWN AM I IN</pattern>
 <template><srai>MY TOWN</srai></template>
-</category>
-<category><pattern>WHO * IS</pattern>
-<template><srai>WHO IS <star/></srai></template>
 </category>
 <category><pattern>YOU CAN BUT *</pattern>
 <template><srai>YOU CAN</srai> <sr/></template>
@@ -3696,9 +3693,7 @@
 <category><pattern>DO YOU KNOW WHAT A * IS</pattern>
 <template><srai>WHAT IS A <star/></srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHO IS *</pattern>
-<template><srai>WHO IS <star/></srai></template>
-</category>
+
 <category><pattern>DO YOU SPEAK <set>language</set></pattern>
 <template><srai>LANGUAGE</srai></template>
 </category>

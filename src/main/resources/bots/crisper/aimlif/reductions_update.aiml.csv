@@ -599,7 +599,6 @@
 0,SEARCH THE INTERNET FOR *,*,*,<srai>SEARCH <star/></srai>,reductions_update.aiml
 0,SHOW A *,*,*,<srai>SHOW ME A <star/></srai>,reductions_update.aiml
 0,TELL ME ABOUT A *,*,*,<srai>WHAT IS A <star/></srai>,reductions_update.aiml
-0,TURN * ON,*,*,<srai>TURN ON <star/></srai>,reductions_update.aiml
 0,BATTERY STATUS,*,*,<srai>BATTERY LEVEL</srai>,reductions_update.aiml
 0,BY,*,*,<srai>BYE</srai>,reductions_update.aiml
 0,CAN YOU FIND MY *,*,*,<srai>FIND MY <star/></srai>,reductions_update.aiml
@@ -676,7 +675,6 @@
 0,WHAT IS THE BATTERY *,*,*,<srai>BATTERY LEVEL</srai>,reductions_update.aiml
 0,YES BABY,*,*,<srai>YES</srai>,reductions_update.aiml
 0,YOUR RUDE,*,*,<srai>YOU ARE RUDE</srai>,reductions_update.aiml
-0,* WHO IS *,*,*,<srai>WHO IS <star index="2"/></srai>,reductions_update.aiml
 0,CAN YOU CHANGE YOUR NAME,*,*,<srai>HELP CHANGE NAME</srai>,reductions_update.aiml
 0,NADA *,*,*,<srai>LANGUAGE</srai>,reductions_update.aiml
 0,CAN YOU GO TO *,*,*,<srai>GO TO <star/></srai>,reductions_update.aiml
@@ -717,7 +715,6 @@
 0,CAN YOU SING ME A SONG,*,*,<srai>CAN YOU SING</srai>,reductions_update.aiml
 0,I SAID YOU *,*,*,<srai>YOU <star/></srai>,reductions_update.aiml
 0,MAKE ME A SANDWICH,*,*,<srai>HOW DO I MAKE A SANDWICH</srai>,reductions_update.aiml
-0,TURN ON *,*,*,<srai>OPEN <star/></srai>,reductions_update.aiml
 0,YOUR THE *,*,*,<srai>YOU ARE THE <star/></srai>,reductions_update.aiml
 0,* I LOVE *,*,*,<srai>I LOVE <star index="2"/></srai>,reductions_update.aiml
 0,* MY NAME IS *,*,*,<sr/> <srai>MY NAME IS <star index="2"/></srai>,reductions_update.aiml

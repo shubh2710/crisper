@@ -97,7 +97,6 @@
 0,WHAT DOES * SPELL,*,*,<srai>IMPLODE <star/></srai>,reductions1.aiml
 0,WHAT TOWN AM I *,*,*,<srai>MY TOWN</srai>,reductions1.aiml
 0,WHAT TOWN AM I IN,*,*,<srai>MY TOWN</srai>,reductions1.aiml
-0,WHO * IS,*,*,<srai>WHO IS <star/></srai>,reductions1.aiml
 0,YOU CAN BUT *,*,*,<srai>YOU CAN</srai> <sr/>,reductions1.aiml
 0,DO YOU KNOW WHERE THE * IS,*,*,<srai>WHERE IS THE <star/></srai>,reductions1.aiml
 0,HAHAHAHAHA,*,*,<srai>LOL</srai>,reductions1.aiml
@@ -1225,7 +1224,6 @@
 0,CAN I HAVE A *,*,*,<srai>I WANT A <star/></srai>,reductions1.aiml
 0,CAN YOU FIND ME *,*,*,<srai>FIND <star/></srai>,reductions1.aiml
 0,DO YOU KNOW WHAT A * IS,*,*,<srai>WHAT IS A <star/></srai>,reductions1.aiml
-0,DO YOU KNOW WHO IS *,*,*,<srai>WHO IS <star/></srai>,reductions1.aiml
 0,DO YOU SPEAK <SET>LANGUAGE</SET>,*,*,<srai>LANGUAGE</srai>,reductions1.aiml
 0,DUNNO,*,*,<srai>I DO NOT KNOW</srai>,reductions1.aiml
 0,GOOGLE SEARCH *,*,*,<srai>SEARCH <star/></srai>,reductions1.aiml

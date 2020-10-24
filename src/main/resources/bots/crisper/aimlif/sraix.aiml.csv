@@ -158,7 +158,6 @@
 0,WHO IS GOD,*,*,<sraix>WHO IS GOD</sraix>,sraix.aiml
 0,WHO IS IN *,*,*,<sraix>WHO IS IN <star/></sraix>,sraix.aiml
 0,WHO IS IN THE *,*,*,<sraix>WHO IS IN THE <star/></sraix>,sraix.aiml
-0,WHO IS *,*,*,<sraix>WHO IS <star/></sraix>,sraix.aiml
 0,WHO IS SHAKESPEARE,*,*,<sraix>WHO IS SHAKESPEARE</sraix>,sraix.aiml
 0,WHO IS SPOCK,*,*,<sraix>WHO IS SPOCK</sraix>,sraix.aiml
 0,WHO IS JESUS CHRIST,*,*,<sraix>WHO IS JESUS CHRIST</sraix>,sraix.aiml

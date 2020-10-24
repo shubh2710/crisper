@@ -2,7 +2,7 @@
 <aiml>
 <!-- File: update.aiml -->
 <!-- Author: Mr. Shubham gulati -->
-<!-- Last modified: October 02, 2020 -->
+<!-- Last modified: October 16, 2020 -->
 <!--  -->
 <!-- This AIML file is part of the CRISPER 0.0.4 chat bot knowledge base. -->
 <!--  -->
@@ -28,6 +28,6 @@
 <template>Program AB 0.0.6.26 beta -- AI Foundation Reference AIML 2.1 implementation</template>
 </category>
 <category><pattern>BRAIN BUILD</pattern>
-<template>Fri Oct 02 06:46:23 PDT 2020</template>
+<template>Fri Oct 16 07:59:55 PDT 2020</template>
 </category>
 </aiml>

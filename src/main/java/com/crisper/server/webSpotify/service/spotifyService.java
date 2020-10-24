@@ -1,7 +1,9 @@
 package com.crisper.server.webSpotify.service;
 
+import com.crisper.server.webSpotify.model.PlayList;
+import com.crisper.server.webSpotify.model.PlayerInfo;
+import com.crisper.server.webSpotify.model.Track;
 import com.jayway.jsonpath.JsonPath;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -17,12 +19,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
-public class spotifyService {
+public class spotifyService implements ISpotifyNotifer{
 
     Logger logger = LoggerFactory.getLogger(spotifyService.class);
     private String refreshToken ="BQCne7lHRLPiGyKNuiv2WYI_cK7mwt79vyOLf0dpHaOIX7krc8JpTspzdPARyOtEWkrHpmYEHD-ArWOMDFj3rapSMI7btAZLAIeHx_dL1bvpMdmhf3pSP_IrDqmwTQ0w0h9E7o-pK2MM0viFpFCDGIct6f1abd80tiHD81bI6qU-IisI7I8w7SCWnKXapr1neOhpVM3Vdi-sIIlbjrzCKOoQDyJsYWS3W1nW_QqCY0JDpHiQDWMCzagcHXCA2cdgUGcG_TH_pGE-fRXWk4y4PPq_IFJiRTZaAUBvWTAky9UnrA";
@@ -31,6 +31,13 @@ public class spotifyService {
     JSONParser parser = new JSONParser();
     RestTemplate restTemplate=new RestTemplate();
     String activeDevice="";
+    private Track currentPlayingTrack;
+    SopitifyScheduler scheduler=new SopitifyScheduler();
+    private int volume=50;
+    private PlayerInfo playerInfo;
+
+    private int index=0;
+    Queue<Track> tracks=new PriorityQueue();
 
     public void setRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
@@ -63,21 +70,16 @@ public class spotifyService {
         refreshToken=(String)object.get("refresh_token");
         token=(String)object.get("access_token");
         logger.info(object.toJSONString());
+        playerInfo();
     }
 
     public void play(String name) {
-
-        String query="q="+name;
-
-        logger.info("calling Play query: "+query);
-        String url = "https://api.spotify.com/v1/search?"+query+"&type=track&limit=20&market=IN";
-
         try {
-            URL u = new URL(url) ;
-            ArrayList<String> list=getSearchData(u.toString());
+            ArrayList<Track> list=getSearchData(name);
             ArrayList<String> activeDeviceList=getAtiveDeviceID();
             checkActive(activeDeviceList);
-            addToPlayList(list);
+            currentPlayingTrack=list.get(0);
+            addToPlayList(list.get(0).getId());
             playNext();
         } catch (ParseException | MalformedURLException e) {
             e.printStackTrace();
@@ -99,27 +101,40 @@ public class spotifyService {
     public void stop() {
         String url =  "https://api.spotify.com/v1/me/player/pause?device_id"+activeDevice;
        callPut(url);
+       scheduler.cancel();
     }
 
+    public void playNextSong() {
+        if(tracks.isEmpty())
+            playNext();
+        else onEnd();
+    }
     public void playNext() {
-        logger.info("Playing next");
-        if(activeDevice.isEmpty()){
+            logger.info("Playing next");
+            if (activeDevice.isEmpty()) {
+                getAtiveDeviceID();
+            }
+            String url = "https://api.spotify.com/v1/me/player/next?device_id=" + activeDevice;
+            callPost(url);
+            scheduleTimer(currentPlayingTrack.getDuration());
+    }
+
+    private void scheduleTimer(int duration) {
+        scheduler.cancel();
+        scheduler.schedule(this,duration);
+    }
+
+    private void addToPlayList(String songId){
+        logger.info("Add to play list");
+        if (activeDevice.isEmpty()) {
             getAtiveDeviceID();
         }
-        String url =  "https://api.spotify.com/v1/me/player/next?device_id="+activeDevice;
-        callPost(url);
-    }
-
-    private void addToPlayList(ArrayList<String> list) throws ParseException, MalformedURLException {
-        logger.info("Add to play list");
-        String song=list.get(0);
-        if(!song.isEmpty() && !activeDevice.isEmpty()) {
-            String url = "https://api.spotify.com/v1/me/player/queue?uri=" + song + "&device_id=" + activeDevice;
-            URL u = new URL(url);
+        if(!songId.isEmpty() && !activeDevice.isEmpty()) {
+            String url = "https://api.spotify.com/v1/me/player/queue?uri=" + songId + "&device_id=" + activeDevice;
             ArrayList<String> deviceList = new ArrayList<>();
             callPost(url);
         }else{
-            logger.info("song or device is empty" + song +" : "+activeDevice);
+            logger.info("song or device is empty" + songId +" : "+activeDevice);
         }
     }
 
@@ -132,17 +147,39 @@ public class spotifyService {
         for (Object element : elements) {
             deviceList.add(JsonPath.read(element, "$.id").toString());
         }
+        checkActive(deviceList);
         activeDevice=deviceList.get(0);
         return deviceList;
     }
 
-    public ArrayList<String> getSearchData(String url) throws ParseException {
-        logger.info("searching song");
-        ArrayList<String> songsList=new ArrayList<>();
+    public ArrayList<Track> getSearchData(String query) throws ParseException, MalformedURLException {
+
+        query="q="+query;
+        logger.info("calling Play query: "+query);
+        String url = "https://api.spotify.com/v1/search?"+query+"&type=track&limit=20&market=IN";
+        ArrayList<Track> songsList=new ArrayList<>();
         JSONObject jsonresponse = callGet(url);
         List elements = JsonPath.read(jsonresponse, "$.tracks.items");
         for (Object element : elements) {
-           songsList.add(JsonPath.read(element, "$.uri").toString());
+           songsList.add(new Track(JsonPath.read(element, "$.uri").toString(),
+                   JsonPath.read(element, "$.duration_ms"),
+                   JsonPath.read(element, "$.popularity"),
+                   JsonPath.read(element, "$.name")));
+        }
+        System.out.println(songsList.toString());
+        return songsList;
+    }
+    public ArrayList<PlayList> getSearchPlayList(String query) {
+        query="q="+query;
+        logger.info("calling Play query: "+query);
+        String url = "https://api.spotify.com/v1/search?"+query+"&type=playlist&limit=5&market=IN";
+
+        ArrayList<PlayList> songsList=new ArrayList<>();
+        JSONObject jsonresponse = callGet(url);
+        List elements = JsonPath.read(jsonresponse, "$.playlists.items");
+        for (Object element : elements) {
+            songsList.add(new PlayList(JsonPath.read(element, "$.id").toString(),
+                   JsonPath.read(element, "$.name").toString()));
         }
         System.out.println(songsList.toString());
         return songsList;
@@ -157,32 +194,40 @@ public class spotifyService {
     }
 
     private JSONObject callPost(String url){
+
         HttpHeaders headers = getHeaders();
         HttpEntity request = new HttpEntity(headers);
         try{
-            ResponseEntity<JSONObject> response = this.restTemplate.exchange(url, HttpMethod.POST, request, JSONObject.class, 1);
+            URL u = new URL(url);
+            ResponseEntity<JSONObject> response = this.restTemplate.exchange(u.toString(), HttpMethod.POST, request, JSONObject.class, 1);
             return response.getBody();
         }catch (HttpClientErrorException exception){
             logger.info(exception.getLocalizedMessage());
-            if(exception.getRawStatusCode()==403){
+            if(exception.getRawStatusCode()==401){
                 getRefreshToken();
                 callPost(url);
             }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
         return null;
     }
     private JSONObject callGet(String url){
+
         HttpHeaders headers = getHeaders();
         HttpEntity request = new HttpEntity(headers);
         try{
-            ResponseEntity<JSONObject> responseEntity=  this.restTemplate.exchange(url, HttpMethod.GET, request, JSONObject.class, 1);
+            URL u = new URL(url);
+            ResponseEntity<JSONObject> responseEntity=  this.restTemplate.exchange(u.toString(), HttpMethod.GET, request, JSONObject.class, 1);
             return responseEntity.getBody();
         }catch (HttpClientErrorException exception){
             logger.info(exception.getLocalizedMessage());
-            if(exception.getRawStatusCode()==403){
+            if(exception.getRawStatusCode()==401){
                 getRefreshToken();
                 callGet(url);
             }
+        }catch (MalformedURLException exception){
+            logger.info(exception.getLocalizedMessage());
         }
         return null;
     }
@@ -193,7 +238,7 @@ public class spotifyService {
             this.restTemplate.put(url,request);
         }catch (HttpClientErrorException exception){
             logger.info(exception.getLocalizedMessage());
-            if(exception.getRawStatusCode()==403){
+            if(exception.getRawStatusCode()==401){
                 getRefreshToken();
                 callPut(url);
             }
@@ -206,10 +251,96 @@ public class spotifyService {
         this.restTemplate.put(url,request);
         }catch (HttpClientErrorException exception){
             logger.info(exception.getLocalizedMessage());
-            if(exception.getRawStatusCode()==403){
+            if(exception.getRawStatusCode()==401){
                 getRefreshToken();
                 callPut(url,personJsonObject);
             }
         }
+    }
+
+    public void playList(String name) {
+        tracks=getTrackList(searchPlayList(name));
+        autoPlay(tracks);
+    }
+
+    private void autoPlay(Queue<Track> tracks) {
+        currentPlayingTrack=tracks.remove();
+        addToPlayList(currentPlayingTrack.getId());
+        playNext();
+    }
+
+    private Queue<Track> getTrackList(String searchPlayList) {
+
+        logger.info("calling playList track: "+searchPlayList);
+        String url = "https://api.spotify.com/v1/playlists/"+searchPlayList+"/tracks?limit=20&market=IN";
+        Queue<Track> songsList=new PriorityQueue<>();
+        JSONObject jsonresponse = callGet(url);
+        List elements = JsonPath.read(jsonresponse, "$.items");
+        for (Object element : elements) {
+            songsList.add(new Track(JsonPath.read(element, "$.track.uri").toString(),
+                            JsonPath.read(element, "$.track.duration_ms"),
+                            JsonPath.read(element, "$.track.popularity"),
+                            JsonPath.read(element, "$.track.name")));
+        }
+        System.out.println(songsList.toString());
+        return songsList;
+    }
+
+    private String searchPlayList(String name) {
+      return   getSearchPlayList(name).get(0).getId();
+    }
+
+    @Override
+    public void onStart() {
+        logger.info("On Song start");
+    }
+
+    @Override
+    public void onEnd() {
+        logger.info("On Song ends");
+        if(!tracks.isEmpty())
+        {   currentPlayingTrack=tracks.remove();
+            addToPlayList(currentPlayingTrack.getId());
+            playNext();
+        }
+    }
+
+    public void volume(String action){
+        if(playerInfo!=null)
+            volume=playerInfo.getVolume();
+        else
+            playerInfo();
+        switch (action){
+            case "down":
+                if(volume>10)
+                volume=volume-15;
+                else volume=0;
+                break;
+            case "up":
+                if(volume<90)
+                volume=volume+15;
+                else
+                    volume=100;
+                break;
+        }
+        volume(volume);
+    }
+    public void volume(int count) {
+        logger.info("check active device");
+        String device=activeDevice;
+        String url =  "https://api.spotify.com/v1/me/player/volume?volume_percent="+count;
+        callPut(url);
+        playerInfo.setVolume(count);
+    }
+    public void playerInfo(){
+        String url="https://api.spotify.com/v1/me/player";
+        JSONObject res=callGet(url);
+        PlayerInfo info=new PlayerInfo();
+        info.setActive(JsonPath.read(res, "$.device.is_active"));
+        info.setId(JsonPath.read(res, "$.device.id"));
+        info.setVolume(JsonPath.read(res, "$.device.volume_percent"));
+        info.setName(JsonPath.read(res, "$.device.name"));
+        info.setPlaying(JsonPath.read(res, "$.is_playing"));
+        playerInfo=info;
     }
 }
