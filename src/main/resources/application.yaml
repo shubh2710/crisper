@@ -1,10 +1,38 @@
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-springspring.datasource.password=
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialectlogging.level.root=INFO
+smart-home:
+  device-map:
+    kitchen:
+      light:
+        id: 12
+        esp: esp0
+        pin: 12
+      fan:
+        id: 13
+        esp: esp0
+        pin: 13
+    myroom:
+      light:
+        id: 12
+        esp: esp0
+        pin: 12
+      fan:
+        id: 13
+        esp: esp0
+        pin: 13
+com:
+  crisper:
+    voice: AI
+    chatbot: AI
 
-com.amazon.ask.servlet.disableRequestSignatureCheck=true
-com.amazon.speech.speechlet.servlet.timestampTolerance=3600000
-#javax.net.ssl.keyStore=YOUR-KEYSTORE-FILE-PATH-HERE
-#javax.net.ssl.keyStorePassword=YOUR-KEYSTOREPASSWORD-HERE
+spring.datasource.url: jdbc:h2:mem:testdb
+spring.datasource.driverClassName: org.h2.Driver
+spring.datasource.username: sa
+springspring.datasource.password:
+spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+server.port: 8080
+
+app.voice.url: D:\\projetcs\\server\\server\\src\\main\\resources\\T2S.py
+app.bot.url: D:\\projetcs\\server\\server\\src\\main\\resources\\botResource
+app.python.version: python
+# Logging
+
+logging.level.root: INFO
