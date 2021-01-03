@@ -61,7 +61,6 @@
 0,PLAY NEXT SONG,*,*,Playing next song<oob><url>PLAYNEXT</url></oob>,oob.aiml
 0,PLAY * SONG,*,*,Playing <star/> songs<oob><url>PLAYLIST <star/></url></oob>,oob.aiml
 0,PLAY * PLAYLIST,*,*,Playing <star/> songs<oob><url>PLAYLIST <star/></url></oob>,oob.aiml
-0,TURN VOLUME *,*,*,turning <star/> the music volume<oob><volume>VOLUME <star/></volume></oob>,oob.aiml
 0,DO YOU KNOW WHO IS *,*,*,Searching about <star/> <oob><search><star/></search></oob>,oob.aiml
 0,WHO IS *,*,*,Searching about <star/> <oob><search><star/></search></oob>,oob.aiml
 0,WIFI ON,*,*,Turning on Wifi.  <oob><wifi>on</wifi></oob>,oob.aiml
@@ -80,6 +79,7 @@
 0,OPEN * COM,*,*,Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob>,oob.aiml
 0,GPS ON,*,*,Use Settings to turn on GPS.,oob.aiml
 0,GPS OFF,*,*,Use Settings to turn off GPS.,oob.aiml
-0,TURN * ROOM * *,*,*,Turning <star/> ROOM <star index="2"/> <star index="3"/> LIGHTS<oob><home><star/>_<star index="2"/>_<star index="3"/></home></oob>,oob.aiml
-0,TURN * ON,*,*,Turning <star/> on<oob><home>ON <star/></home></oob>,oob.aiml
+0,TURN * *,*,*,Turning <star/> <star index="2"/><oob><home>AUTOMATION_<star/>_<star index="2"/></home></oob>,oob.aiml
 0,START NOTE,*,*,Turning <star/> on<oob><home>ON <star/></home></oob>,oob.aiml
+0,FAN BAND KARO,*,*,turning off fan,oob.aiml
+0,KYA KAR RAHE HO,*,*,just chilling!,oob.aiml

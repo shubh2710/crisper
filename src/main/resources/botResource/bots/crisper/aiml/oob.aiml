@@ -210,10 +210,6 @@
 <template>Playing <star/> songs<oob><url>PLAYLIST <star/></url></oob></template>
 </category>
 
-<category><pattern>TURN VOLUME *</pattern>
-<template>turning <star/> the music volume<oob><volume>VOLUME <star/></volume></oob></template>
-</category>
-
 <category><pattern>DO YOU KNOW WHO IS *</pattern>
 <template>Searching about <star/> <oob><search><star/></search></oob></template>
 </category>
@@ -270,21 +266,22 @@
 <template>Use Settings to turn off GPS.</template>
 </category>
 
-
-<category><pattern>TURN * ROOM * *</pattern>
-<template>Turning <star/> ROOM <star index="2"/> <star index="3"/> LIGHTS<oob><home><star/>_<star index="2"/>_<star index="3"/></home></oob></template>
+<category><pattern>TURN * *</pattern>
+<template>Turning <star/> <star index="2"/><oob><home>AUTOMATION_<star/>_<star index="2"/></home></oob></template>
 </category>
 
-<category><pattern>TURN * ON</pattern>
-<template>Turning <star/> on<oob><home>ON <star/></home></oob></template>
-</category>
 
 <category><pattern>Start NOTE</pattern>
 <template>Turning <star/> on<oob><home>ON <star/></home></oob></template>
 </category>
 
 
+<category><pattern>fan band karo</pattern>
+<template>turning off fan</template>
+</category>
 
-
+<category><pattern>kya kar rahe ho</pattern>
+<template>just chilling!</template>
+</category>
 
 </aiml>

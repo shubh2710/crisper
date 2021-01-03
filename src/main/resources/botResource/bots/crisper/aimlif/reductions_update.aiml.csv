@@ -237,7 +237,6 @@
 0,SKYPE *,*,*,<srai>FEATURE REQUEST SKYPE</srai>,reductions_update.aiml
 0,TELL ME WHAT A * IS,*,*,<srai>WHAT IS A <star/></srai>,reductions_update.aiml
 0,TELL ME WHY * IS *,*,*,<srai>WHY IS <star/> <star index="2"/></srai>,reductions_update.aiml
-0,TURN ON WIFI,*,*,<srai>WIFI ON</srai>,reductions_update.aiml
 0,WHAT ARE THE 10 COMMANDMENTS,*,*,<srai>TEN COMMANDMENTS</srai>,reductions_update.aiml
 0,WHAT DO I HAVE ON MY CALENDAR TODAY,*,*,<srai>OPEN CALENDAR</srai>,reductions_update.aiml
 0,WHERE IS THE BEST PLACE TO GET PIZZA,*,*,<srai>FIND THE NEAREST PIZZA</srai>,reductions_update.aiml
@@ -320,8 +319,6 @@
 0,TEXT * HI,*,*,<srai>TEXT <star/> SAYING HI</srai>,reductions_update.aiml
 0,TEXT MESSAGES,*,*,<srai>SEND A TEXT</srai>,reductions_update.aiml
 0,THAT IS AMAZING *,*,*,<srai>THAT IS AMAZING</srai>,reductions_update.aiml
-0,TURN OFF WIFI,*,*,<srai>WIFI OFF</srai>,reductions_update.aiml
-0,TURN ON BLUETOOTH,*,*,<srai>FEATURE REQUEST TURN ON BLUETOOTH</srai>,reductions_update.aiml
 0,WE HAVE A FLAT TIRE,*,*,<srai>I HAVE A FLAT TIRE</srai>,reductions_update.aiml
 0,WHAT IS YOUR FAVORITE SINGER,*,*,<srai>WHO IS YOUR FAVORITE BAND</srai>,reductions_update.aiml
 0,WHAT SHOULD I EAT FOR DINNER,*,*,<srai>RECOMMEND DINNER</srai>,reductions_update.aiml

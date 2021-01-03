@@ -732,9 +732,6 @@
 <category><pattern>TELL ME WHY * IS *</pattern>
 <template><srai>WHY IS <star/> <star index="2"/></srai></template>
 </category>
-<category><pattern>TURN ON WIFI</pattern>
-<template><srai>WIFI ON</srai></template>
-</category>
 <category><pattern>WHAT ARE THE 10 COMMANDMENTS</pattern>
 <template><srai>TEN COMMANDMENTS</srai></template>
 </category>
@@ -981,12 +978,7 @@
 <category><pattern>THAT IS AMAZING *</pattern>
 <template><srai>THAT IS AMAZING</srai></template>
 </category>
-<category><pattern>TURN OFF WIFI</pattern>
-<template><srai>WIFI OFF</srai></template>
-</category>
-<category><pattern>TURN ON BLUETOOTH</pattern>
-<template><srai>FEATURE REQUEST TURN ON BLUETOOTH</srai></template>
-</category>
+
 <category><pattern>WE HAVE A FLAT TIRE</pattern>
 <template><srai>I HAVE A FLAT TIRE</srai></template>
 </category>
